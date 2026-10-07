@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#254744">
+    <title>Daybook — Student Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Daybook home">
+          <span class="brand-mark" aria-hidden="true">▤</span>
+          <span><strong>Daybook</strong><small>STUDY SPACE</small></span>
+        </a>
+        <p class="sidebar-label">Your workspace</p>
+        <nav class="nav-list" aria-label="Workspace">
+          <a class="nav-item is-active" href="/" aria-current="page"><span aria-hidden="true">▦</span> Overview</a>
+          <button class="nav-item" id="manage-subjects" type="button"><span aria-hidden="true">▧</span> Subjects</button>
+        </nav>
+        <div class="sidebar-note">
+          <span class="note-icon" aria-hidden="true">?</span>
+          <strong>A little at a time.</strong>
+          <p>Keep your next step close. The rest can wait.</p>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="mobile-header">
+          <a class="brand brand-mobile" href="/"><span class="brand-mark" aria-hidden="true">▤</span><strong>Daybook</strong></a>
+          <button class="button button-secondary button-small" id="mobile-subjects" type="button">Subjects</button>
+        </header>
+
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">Your week, in view</p>
+            <h1>A clear mind starts here.</h1>
+            <p class="intro">Keep classes and due dates together. Choose one next step, and let the rest wait.</p>
+          </div>
+          <button class="button button-primary" id="add-assignment" type="button"><span aria-hidden="true">＋</span> Add assignment</button>
+        </div>
+
+        <p class="alert" id="app-alert" role="alert" hidden></p>
+
+        <section class="summary-grid" aria-label="Assignment summary">
+          <article class="summary-card summary-total">
+            <p>▤ &nbsp;In your study space</p>
+            <div class="summary-number"><strong id="summary-total">—</strong><span>assignments to tend to</span></div>
+            <p class="summary-foot"><b id="summary-completed">0</b> finished <span aria-hidden="true">·</span> <b id="summary-subjects">0</b> subjects</p>
+          </article>
+          <article class="summary-card">
+            <p>Coming up soon <span aria-hidden="true">◷</span></p>
+            <div class="summary-number"><strong id="summary-due-soon">—</strong><span>due this week</span></div>
+            <p class="summary-description">A little planning goes a long way.</p>
+          </article>
+          <article class="summary-card summary-overdue">
+            <p>Needs a look <span aria-hidden="true">ⓘ</span></p>
+            <div class="summary-number"><strong id="summary-overdue">—</strong><span>past due</span></div>
+            <p class="summary-description">Start with one. You’ve got this.</p>
+          </article>
+        </section>
+
+        <section class="assignment-panel" aria-labelledby="assignments-heading">
+          <div class="panel-header">
+            <div class="panel-title-row">
+              <div><p class="eyebrow">The to-do, not the whole world</p><h2 id="assignments-heading">Your assignments</h2></div>
+              <span class="encouragement">✓ &nbsp;Small steps count</span>
+            </div>
+            <div class="filter-row">
+              <label class="search-field"><span aria-hidden="true">⌕</span><input id="search-assignments" type="search" placeholder="Search assignments or subjects" autocomplete="off" aria-label="Search assignments or subjects"></label>
+              <label class="visually-hidden" for="filter-subject">Filter by subject</label>
+              <select id="filter-subject" aria-label="Filter by subject"><option value="">All subjects</option></select>
+            </div>
+            <div class="status-tabs" role="tablist" aria-label="Filter assignments by status">
+              <button class="status-tab is-selected" type="button" role="tab" aria-selected="true" data-status="all">Everything <span id="count-all">0</span></button>
+              <button class="status-tab" type="button" role="tab" aria-selected="false" data-status="pending">Pending <span id="count-pending">0</span></button>
+              <button class="status-tab" type="button" role="tab" aria-selected="false" data-status="in-progress">In progress <span id="count-in-progress">0</span></button>
+              <button class="status-tab" type="button" role="tab" aria-selected="false" data-status="completed">Completed <span id="count-completed">0</span></button>
+            </div>
+          </div>
+          <div class="assignment-list" id="assignment-list" aria-live="polite">
+            <p class="list-message">Loading your assignments…</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="dialog" id="assignment-dialog" aria-labelledby="assignment-dialog-title">
+      <form id="assignment-form">
+        <div class="dialog-heading">
+          <div><p class="eyebrow" id="assignment-kicker">New commitment</p><h2 id="assignment-dialog-title">Add an assignment</h2></div>
+          <button class="icon-button" type="button" data-close-dialog="assignment-dialog" aria-label="Close">×</button>
+        </div>
+        <label class="form-field">Assignment name
+          <input name="title" required maxlength="200" placeholder="e.g. Read chapter four">
+        </label>
+        <div class="form-grid">
+          <label class="form-field">Subject
+            <select name="subjectId" id="assignment-subject" required></select>
+          </label>
+          <label class="form-field">Due date
+            <input name="deadline" type="date" required>
+          </label>
+        </div>
+        <label class="form-field">Progress
+          <select name="status">
+            <option value="pending">Pending</option>
+            <option value="in-progress">In progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+        <p class="dialog-error" id="assignment-error" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button class="button button-secondary" type="button" data-close-dialog="assignment-dialog">Cancel</button>
+          <button class="button button-primary" type="submit" id="save-assignment">Add assignment</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="dialog subjects-dialog" id="subjects-dialog" aria-labelledby="subjects-dialog-title">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">Your course list</p><h2 id="subjects-dialog-title">Subjects, together.</h2></div>
+        <button class="icon-button" type="button" data-close-dialog="subjects-dialog" aria-label="Close">×</button>
+      </div>
+      <p class="dialog-intro">Give each class a name you’ll recognize at a glance.</p>
+      <form id="subject-form" class="subject-form">
+        <label class="visually-hidden" for="subject-name">Subject name</label>
+        <input id="subject-name" name="name" required maxlength="80" placeholder="e.g. Modern literature">
+        <button class="button button-primary" type="submit">Add subject</button>
+      </form>
+      <p class="dialog-error" id="subject-error" role="alert" hidden></p>
+      <div class="subject-list" id="subject-list"></div>
+      <p class="subject-hint">A subject with assignments can’t be removed until those assignments are cleared.</p>
+    </dialog>
+  </body>
+</html>

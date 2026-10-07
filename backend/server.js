@@ -3,6 +3,7 @@
 const path = require("node:path");
 const fs = require("node:fs");
 const express = require("express");
+const cors = require("cors");
 const Database = require("better-sqlite3");
 const createAssignmentRouter = require("./routes/assignmentRoutes");
 
@@ -14,6 +15,7 @@ function createApp(db) {
   if (!db) throw new Error("A SQLite database connection is required.");
 
   const app = express();
+  app.use(cors());
   app.use(express.json({ limit: "32kb" }));
   app.use("/api", createAssignmentRouter(db));
   app.use("/api", (_request, response) => response.status(404).json({ error: "API route not found" }));
