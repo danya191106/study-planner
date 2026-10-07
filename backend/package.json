@@ -1,0 +1,16 @@
+{
+  "name": "study-planner-backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6"
+  }
+}
