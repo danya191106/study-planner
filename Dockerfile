@@ -1,12 +1,10 @@
 FROM node:22-slim
 
-WORKDIR /app
+COPY package*.json ./
+RUN npm install
 
-COPY backend/package*.json ./backend/
-RUN cd backend && npm install
-
-COPY . .
+COPY . /
 
 EXPOSE 5000
 
-CMD ["node", "backend/server.js"]
+CMD ["node", "/server.js"]

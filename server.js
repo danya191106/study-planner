@@ -7,9 +7,9 @@ const cors = require("cors");
 const Database = require("better-sqlite3");
 const createAssignmentRouter = require("./routes/assignmentRoutes");
 
-const frontendDirectory = path.join(__dirname, "..", "frontend");
-const databaseFile = path.join(__dirname, "..", "database", "study_planner.db");
-const schemaFile = path.join(__dirname, "..", "database", "assignments.sql");
+const frontendDirectory = __dirname;
+const databaseFile = path.join(__dirname, "study_planner.db");
+const schemaFile = path.join(__dirname, "assignments.sql");
 
 function createApp(db) {
   if (!db) throw new Error("A SQLite database connection is required.");
