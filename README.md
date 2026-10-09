@@ -39,18 +39,18 @@ A modern full-stack web application to help students organize subjects, assignme
 ## 📁 Project Structure
 
 study-planner/
-├── index.html # Frontend — main page
-├── script.js # Frontend — logic & API calls
-├── style.css # Frontend — styling
-├── server.js # Backend — Express server
+├── index.html              # Frontend — main page
+├── script.js               # Frontend — logic & API calls
+├── style.css               # Frontend — styling
+├── server.js               # Backend — Express server
 ├── routes/
-│ └── assignmentRoutes.js # API routes
-├── assignments.sql # Database schema + seed data
-├── package.json # Dependencies
-├── Dockerfile # Container config
-├── .gitignore # Git ignore rules
-└── README.md # This file
-
+│   └── assignmentRoutes.js # API routes
+├── assignments.sql         # Database schema + seed data
+├── package.json            # Dependencies
+├── package-lock.json       # Dependency lock
+├── Dockerfile              # Container config
+├── .gitignore              # Git ignore rules
+└── README.md               # This file
 
 ---
 
@@ -78,23 +78,25 @@ node server.js
 The SQLite database auto-initializes with 3 sample subjects and 3 sample assignments.
 
 ## 🔌 API Endpoints
-Method	   Endpoint  	             Description
-GET	     /api/subjects	         List all subjects
-POST	   /api/subjects 	         Create a new subject
-DELETE	 /api/subjects/:id	     Delete a subject
-GET	     /api/assignments	       List all assignments (with filters)
-POST	   /api/assignments	       Create a new assignment
-PATCH	   /api/assignments/:id   	Update an assignment
-DELETE	 /api/assignments/:id	    Delete an assignment
-GET	     /api/dashboard/summary	  Dashboard statistics
 
-### Query Parameters (for /api/assignments)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/subjects` | List all subjects |
+| POST | `/api/subjects` | Create a new subject |
+| DELETE | `/api/subjects/:id` | Delete a subject |
+| GET | `/api/assignments` | List all assignments (with filters) |
+| POST | `/api/assignments` | Create a new assignment |
+| PATCH | `/api/assignments/:id` | Update an assignment |
+| DELETE | `/api/assignments/:id` | Delete an assignment |
+| GET | `/api/dashboard/summary` | Dashboard statistics |
 
-?search= — Search by title or subject name
+### Query Parameters (for `/api/assignments`)
 
-?status= — Filter by pending, in-progress, or completed
-
-?subjectId= — Filter by subject ID
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `search` | string | Search by title or subject name |
+| `status` | string | Filter by `pending`, `in-progress`, or `completed` |
+| `subjectId` | integer | Filter by subject ID |
 
 ### 🎯 What I Learned
 
