@@ -60,24 +60,24 @@ study-planner/
 - Node.js 22.x or higher
 - npm
 
-### Steps
+## Steps
 
-# 1. Clone the repository
+## 1. Clone the repository
 git clone https://github.com/danya191106/study-planner.git
 cd study-planner
 
-# 2. Install dependencies
+## 2. Install dependencies
 npm install
 
-# 3. Start the server
+## 3. Start the server
 node server.js
 
-# 4. Open in browser
+## 4. Open in browser
 # http://localhost:5000
 
 The SQLite database auto-initializes with 3 sample subjects and 3 sample assignments.
 
-##🔌 API Endpoints
+## 🔌 API Endpoints
 Method	   Endpoint  	             Description
 GET	     /api/subjects	         List all subjects
 POST	   /api/subjects 	         Create a new subject
@@ -96,7 +96,7 @@ GET	     /api/dashboard/summary	  Dashboard statistics
 
 ?subjectId= — Filter by subject ID
 
-###🎯 What I Learned
+### 🎯 What I Learned
 
 Building a full-stack app with REST API architecture
 
@@ -112,7 +112,7 @@ Git workflow — branching, commits, device authentication
 
 Docker basics for containerized deployment
 
-##👩‍💻 Author
+## 👩‍💻 Author
 Danya Loganathan
 
 GitHub: @danya191106
